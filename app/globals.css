@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Arboreto';
+  src: url('/fonts/FONT_ABORETO-REGULAR.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Use the font globally */
+h1 {
+  font-family: 'Arboreto', sans-serif;
+}
+
+/* 
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -30,4 +43,4 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-}
+} */
