@@ -1,10 +1,14 @@
 import Hero from '@/components/Hero';
-import Navbar from '@/components/Navbar';
+import NewArrivals from '@/components/NewArrivals';
+import Newsletters from '@/components/Newsletters';
 
 const HomePage = () => {
   return (
     <>
       <Hero />
+      <NewArrivals />
+      <div className='h-20 w-full'></div>
+      <Newsletters />
     </>
   );
 };

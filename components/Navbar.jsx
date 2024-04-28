@@ -17,7 +17,6 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    // <nav className='grid grid-cols-3 place-items-center w-full'>
     <nav className='absolute z-10 flex justify-between items-center w-full py-4 px-10 pt-7'>
       {!isMenuOpen ? (
         <button
@@ -35,8 +34,15 @@ const Navbar = () => {
         <div className='px-12 m-1'></div>
       )}
 
-      <div className=''>
-        <Link className='' href='/'>
+      {/* <div className='absolute right-1/2 transform translate-x-20'> */}
+      <div
+        style={{
+          position: 'absolute',
+          right: '50%',
+          transform: 'translateX(84px)',
+        }}
+      >
+        <Link href='/'>
           <Image
             className='w-60 transform translate-x-7'
             src={logo}

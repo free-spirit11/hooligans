@@ -1,12 +1,9 @@
-import Image from 'next/image';
-import leftImage from '@/assets/images/left-background.png';
-import rightImage from '@/assets/images/right-background.png';
 import Navbar from './Navbar';
 import Link from 'next/link';
 
 const Hero = () => {
   return (
-    <section className='relative'>
+    <section className='relative h-screen overflow-hidden'>
       <div className='absolute inset-0 bg-gray-950 bg-opacity-20'></div>
       <Navbar />
       <div className='absolute inset-0 flex flex-col justify-center text-white'>
@@ -23,20 +20,14 @@ const Hero = () => {
         </Link>
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-0'>
-        <div>
-          <Image
-            className='w-full h-auto'
-            src={leftImage}
-            alt='Left background'
-          />
-        </div>
-        <div>
-          <Image
-            className='w-full h-auto'
-            src={rightImage}
-            alt='Right background'
-          />
-        </div>
+        <div
+          className='bg-top bg-cover h-screen'
+          style={{ backgroundImage: `url('/left-background.png')` }}
+        ></div>
+        <div
+          className='bg-top bg-cover h-screen'
+          style={{ backgroundImage: `url('/right-background.png')` }}
+        ></div>
       </div>
     </section>
   );

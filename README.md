@@ -34,3 +34,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+// TODOs:
+
+1. Make hooligans logo on the Navbar fixed, to avoid it changing position when search input opens
+2. Change responsiveness and set up small screens view
+3. Make menu closing even when clicking on any part of the screen outside of the box
