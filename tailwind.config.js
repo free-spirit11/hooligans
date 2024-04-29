@@ -18,9 +18,14 @@ module.exports = {
       height: {
         '850px': '53rem',
       },
+      width: {
+        '450px': '28rem',
+      },
       colors: {
         'custom-blue': '#10069f',
         'custom-orange': '#ffaa4d',
+        'custom-gray': '#f3f1f3',
+        'custom-gray-2': '#e5e1e67a',
       },
     },
   },

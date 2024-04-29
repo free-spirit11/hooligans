@@ -3,55 +3,55 @@ import Image from 'next/image';
 
 const Menu = ({ setIsMenuOpen }) => {
   return (
-    <div className='fixed inset-0 z-10 flex justify-start flex-col bg-black bg-opacity-60'>
+    <div className='fixed inset-0 z-10 flex flex-col justify-start bg-black bg-opacity-60'>
       <button
-        className='flex self-start inline-flex items-center mb-4 text-lg text-white mt-7 ml-11 rounded-md p-1 hover:bg-black hover:bg-opacity-10'
+        className='flex inline-flex items-center self-start p-1 pb-2 mb-5 text-lg text-white rounded-md mt-7 ml-11 '
         onClick={() => setIsMenuOpen((prev) => !prev)}
       >
         <Image src={hamburgerClose} />
         <span className='px-3'>Close</span>
       </button>
-      <div className='self-start bg-white p-10 pr-20 shadow-lg ml-12'>
+      <div className='self-start p-10 pr-20 ml-12 bg-white shadow-lg'>
         <div className='flex flex-col justify-start'>
           <a
             href='/sunglasses'
-            className='mb-2 pb-1 pr-40 text-xl font-light hover:text-gray-500 transition-colors border-b border-gray-900'
+            className='pb-1 pr-40 mb-2 text-xl font-light transition-colors border-b border-gray-900 hover:text-gray-500'
           >
             SUNGLASSES
           </a>
           <a
             href='/eyeglasses'
-            className='mb-2 pb-1 pt-3 text-xl font-light hover:text-gray-500 transition-colors border-b border-gray-900'
+            className='pt-3 pb-1 mb-2 text-xl font-light transition-colors border-b border-gray-900 hover:text-gray-500'
           >
             EYEGLASSES
           </a>
           <a
             href='/brands'
-            className='mb-2 pb-1 pt-3 text-xl font-light hover:text-gray-500 transition-colors border-b border-gray-900'
+            className='pt-3 pb-1 mb-2 text-xl font-light transition-colors border-b border-gray-900 hover:text-gray-500'
           >
             BRANDS
           </a>
           <a
             href='/sale'
-            className='mb-2 pb-1 pt-3 text-xl font-light hover:text-gray-500 transition-colors border-b border-gray-900'
+            className='pt-3 pb-1 mb-2 text-xl font-light transition-colors border-b border-gray-900 hover:text-gray-500'
           >
             SALE
           </a>
           <a
             href='/women'
-            className='mb-2 pb-1 pt-3 text-xl font-light hover:text-gray-500 transition-colors border-b border-gray-900'
+            className='pt-3 pb-1 mb-2 text-xl font-light transition-colors border-b border-gray-900 hover:text-gray-500'
           >
             Woman
           </a>
           <a
             href='/men'
-            className='mb-2 pb-1 pt-3 text-xl font-light hover:text-gray-500 transition-colors border-b border-gray-900'
+            className='pt-3 pb-1 mb-2 text-xl font-light transition-colors border-b border-gray-900 hover:text-gray-500'
           >
             Man
           </a>
           <a
             href='/login'
-            className='mt-4 py-40 pb-1 hover:text-gray-500 transition-colors'
+            className='py-40 pb-1 mt-4 transition-colors hover:text-gray-500'
           >
             Login
           </a>

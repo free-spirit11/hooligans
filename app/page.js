@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero';
 import NewArrivals from '@/components/NewArrivals';
 import Newsletters from '@/components/Newsletters';
+import ShoppingBag from '@/components/ShoppingBag';
 
 const HomePage = () => {
   return (

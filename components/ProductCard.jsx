@@ -7,11 +7,14 @@ const ProductCard = () => {
   return (
     <div className='min-w-[25%] p-2 px-4'>
       <div className='relative'>
-        <Image
-          className='bg-gray-200 w-full'
-          src={testGlasses}
-          alt='Glasses product image'
-        />
+        <Link href='/'>
+          <Image
+            className='bg-custom-gray w-full'
+            src={testGlasses}
+            alt='Glasses product image'
+          />
+        </Link>
+
         <button className='absolute top-2 right-2'>
           <Image className='w-8 hover:w-10' src={wishlistIcon} />
         </button>
