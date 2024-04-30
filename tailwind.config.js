@@ -15,6 +15,12 @@ module.exports = {
       gridTemplateColumns: {
         '40/60': '40% 60%',
       },
+      gridTemplateRows: {
+        '60/30': '60% 30%',
+        '45/45': '45% 45%',
+        '30/60': '30% 60%',
+        '40/60': '40% 60%',
+      },
       height: {
         '850px': '53rem',
       },

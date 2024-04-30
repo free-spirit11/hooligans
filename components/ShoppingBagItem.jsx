@@ -5,7 +5,7 @@ const ShoppingBagItem = () => {
   return (
     <div className='inline-flex w-[90%] py-4 m-2 mx-5 border-b border-gray-300'>
       <div name='item image' className='w-32 h-32 bg-custom-gray-2'>
-        <Image src={item} />
+        <Image src={item} alt='' />
       </div>
       <div
         className='flex flex-col justify-between flex-1 pl-2 '

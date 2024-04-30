@@ -3,20 +3,19 @@ import wishlistIcon from '@/assets/images/black-wishlist.svg';
 import testGlasses from '@/assets/images/Balenciaga Glasses.png';
 import Link from 'next/link';
 
-const ProductCard = () => {
+const ProductCard = ({ id }) => {
   return (
     <div className='min-w-[25%] p-2 px-4'>
-      <div className='relative'>
-        <Link href='/'>
+      <div className='relative transition-transform duration-500 shadow-lg hover:opacity-90 hover:scale-110 '>
+        <Link href={`/store/product/${id}`}>
           <Image
-            className='bg-custom-gray w-full'
+            className='w-full bg-custom-gray'
             src={testGlasses}
             alt='Glasses product image'
           />
         </Link>
-
         <button className='absolute top-2 right-2'>
-          <Image className='w-8 hover:w-10' src={wishlistIcon} />
+          <Image className='w-8 hover:w-10' src={wishlistIcon} alt='wishlist' />
         </button>
       </div>
       <div>
