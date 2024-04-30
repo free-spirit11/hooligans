@@ -2,7 +2,6 @@
 import Navbar from '@/components/Navbar';
 import Exhibition from '@/components/Exhibition';
 import Image from 'next/image';
-import glasses from '@/assets/images/Balenciaga Glasses.png';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { fetchProduct } from '@/utils/requests';
