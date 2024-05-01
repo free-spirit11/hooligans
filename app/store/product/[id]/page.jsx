@@ -5,10 +5,12 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { fetchProduct } from '@/utils/requests';
+import { useShoppingBagContext } from '@/contexts/ShoppingBagContext';
 
 const ProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const { addItemToBag } = useShoppingBagContext();
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -28,7 +30,6 @@ const ProductPage = () => {
     if (product === null) {
       fetchProductData();
     }
-    console.log(product);
   }, [id, product]);
 
   if (!product) {
@@ -86,12 +87,15 @@ const ProductPage = () => {
             <div>
               <span>${product.price}</span>
               {product.sale && (
-                <span className='ml-5 text-red-300'>Sale 46%</span>
+                <span className='ml-5 text-red-300'>ON SALE</span>
               )}
             </div>
           </div>
           <div className='flex flex-col mt-24'>
-            <button className='h-10 m-1 text-sm font-light text-white bg-black border border-black w-450px hover:bg-blue-800'>
+            <button
+              className='h-10 m-1 text-sm font-light text-white bg-black border border-black w-450px hover:bg-blue-800'
+              onClick={() => addItemToBag(product)}
+            >
               Add to cart
             </button>
             <button className='h-10 m-1 text-sm font-light text-black border border-black w-450px hover:bg-blue-800'>

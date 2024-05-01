@@ -1,6 +1,6 @@
-import Navbar from '@/components/Navbar';
 import './globals.css';
 import Footer from '@/components/Footer';
+import { ShoppingBagProvider } from '@/contexts/ShoppingBagContext';
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,11 +12,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='en'>
-      <body>
-        <main> {children}</main>
-        <Footer />
-      </body>
-    </html>
+    <ShoppingBagProvider>
+      <html lang='en'>
+        <body>
+          <main> {children}</main>
+          <Footer />
+        </body>
+      </html>
+    </ShoppingBagProvider>
   );
 }

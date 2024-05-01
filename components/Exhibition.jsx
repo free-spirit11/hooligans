@@ -1,7 +1,30 @@
+'use client';
 import Link from 'next/link';
 import ProductCard from './ProductCard';
+import { useState, useEffect } from 'react';
+import { fetchProducts } from '@/utils/requests';
 
 const Exhibition = ({ heading }) => {
+  const [products, setProducts] = useState(null);
+
+  useEffect(() => {
+    const fetchProductsData = async () => {
+      try {
+        const fetchedProducts = await fetchProducts();
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error('Error fetching product:', error);
+      }
+      // do loading spinner later
+      //   finally {
+      //     setLoading(false);
+      //   }
+    };
+    if (products === null) {
+      fetchProductsData();
+    }
+  }, []);
+
   return (
     <section>
       <div>
@@ -14,12 +37,10 @@ const Exhibition = ({ heading }) => {
           </Link>
         </div>
         <div className='inline-flex p-4 space-x-4 overflow-x-auto hide-scrollbar'>
-          <ProductCard id='1' />
-          <ProductCard id='1' />
-          <ProductCard id='1' />
-          <ProductCard id='1' />
-          <ProductCard id='1' />
-          <ProductCard id='1' />
+          {products &&
+            products.map((product, index) => (
+              <ProductCard product={product} key={index} />
+            ))}
         </div>
       </div>
     </section>
