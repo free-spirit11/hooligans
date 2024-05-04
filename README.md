@@ -41,3 +41,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 2. Change responsiveness and set up small screens view
 3. Make menu closing even when clicking on any part of the screen outside of the box
 4. Move navbar to layout and change its color depending on the route (if main page - white, the rest - black)
+5. Store page with all products, pagination, sorting ...
