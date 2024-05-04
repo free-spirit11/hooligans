@@ -4,7 +4,8 @@ import { useShoppingBagContext } from '@/contexts/ShoppingBagContext';
 import Image from 'next/image';
 
 const WishlistPage = () => {
-  const { wishlistItems, addWishlistItem } = useShoppingBagContext();
+  const { wishlistItems, addItemToBag, removeWishlistItem } =
+    useShoppingBagContext();
 
   return (
     <>
@@ -54,10 +55,16 @@ const WishlistPage = () => {
                       </span>
                     </td>
                     <td className='px-6 py-4'>
-                      <button className='w-full py-3 mb-2 text-xs text-white bg-blue-700 border hover:bg-blue-800'>
+                      <button
+                        className='w-full py-3 mb-2 text-xs text-white bg-button-blue hover:bg-button-blue-hover'
+                        onClick={() => addItemToBag(wishlistItem)}
+                      >
                         ADD TO CART
                       </button>
-                      <button className='w-full py-3 text-xs text-white bg-red-600 border hover:bg-red-700'>
+                      <button
+                        className='w-full py-3 text-xs text-white bg-red-600 border hover:bg-red-700'
+                        onClick={() => removeWishlistItem(wishlistItem)}
+                      >
                         DELETE
                       </button>
                     </td>

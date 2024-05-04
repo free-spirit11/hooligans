@@ -1,6 +1,8 @@
 import './globals.css';
 import Footer from '@/components/Footer';
 import { ShoppingBagProvider } from '@/contexts/ShoppingBagContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata = {
   title: 'Create Next App',
@@ -17,6 +19,7 @@ export default function RootLayout({ children }) {
         <body>
           <main> {children}</main>
           <Footer />
+          <ToastContainer position='bottom-center' />
         </body>
       </html>
     </ShoppingBagProvider>

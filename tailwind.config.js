@@ -32,6 +32,8 @@ module.exports = {
         'custom-orange': '#ffaa4d',
         'custom-gray': '#f3f1f3',
         'custom-gray-2': '#e5e1e67a',
+        'button-blue': '#2864A2',
+        'button-blue-hover': '#1E4C7A',
       },
     },
   },

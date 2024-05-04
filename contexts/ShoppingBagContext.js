@@ -5,6 +5,7 @@ import {
   removeFromBag,
   deleteFromBag,
 } from '@/utils/shoppingBagOperations';
+import { toast } from 'react-toastify';
 
 const addToWishlist = (wishlistItems, productToAdd) => {
   const isInWishlist = wishlistItems.find(
@@ -12,10 +13,25 @@ const addToWishlist = (wishlistItems, productToAdd) => {
   );
 
   if (isInWishlist) {
+    toast.info('Item is already in the wishlist');
     return wishlistItems;
   }
 
   return [...wishlistItems, productToAdd];
+};
+
+const removeFromWishlist = (wishlistItems, productToRemove) => {
+  const isInWishlist = wishlistItems.find(
+    (wishlistItem) => productToRemove._id === wishlistItem._id
+  );
+
+  if (!isInWishlist) {
+    throw new Error('Item is not in the wishlist'); // TODO: change it to toast later
+  }
+
+  return wishlistItems.filter(
+    (wishlistItem) => productToRemove._id !== wishlistItem._id
+  );
 };
 
 const ShoppingBagContext = createContext({
@@ -44,6 +60,7 @@ export function ShoppingBagProvider({ children }) {
 
   const addItemToBag = (productToAdd) => {
     setShoppingBagItems(addToBag(shoppingBagItems, productToAdd));
+    toast.success('Item added to the Shopping Bag successfully');
   };
   const removeItemFromBag = (productToRemove) => {
     setShoppingBagItems(removeFromBag(shoppingBagItems, productToRemove));
@@ -54,6 +71,12 @@ export function ShoppingBagProvider({ children }) {
 
   const addWishlistItem = (productToAdd) => {
     setWishlistItems(addToWishlist(wishlistItems, productToAdd));
+    toast.success('Item added to the Wishlist successfully');
+  };
+
+  const removeWishlistItem = (productToRemove) => {
+    setWishlistItems(removeFromWishlist(wishlistItems, productToRemove));
+    toast.success('Item removed from the Wishlist successfully');
   };
 
   return (
@@ -68,6 +91,7 @@ export function ShoppingBagProvider({ children }) {
         totalQuantity,
         wishlistItems,
         addWishlistItem,
+        removeWishlistItem,
       }}
     >
       {children}

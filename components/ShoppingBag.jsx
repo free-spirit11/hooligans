@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import ShoppingBagItem from './ShoppingBagItem';
 import { useShoppingBagContext } from '@/contexts/ShoppingBagContext';
 
@@ -8,7 +9,11 @@ const ShoppingBag = ({ isOpen, setIsOpen, color }) => {
   return (
     <>
       {!isOpen && (
-        <button className='flex' onClick={() => setIsOpen(!isOpen)}>
+        <button
+          className='flex'
+          name='Shopping bag nav button'
+          onClick={() => setIsOpen(!isOpen)}
+        >
           <svg
             width='17'
             height='17'
@@ -25,7 +30,7 @@ const ShoppingBag = ({ isOpen, setIsOpen, color }) => {
         </button>
       )}
       <div
-        className={`fixed inset-y-0 right-0 w-450px bg-custom-gray z-30 transform ${
+        className={`p-4 fixed inset-y-0 right-0 w-450px bg-custom-gray z-30 transform ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         } transition-transform duration-500 ease-in-out flex flex-col`}
       >
@@ -65,15 +70,17 @@ const ShoppingBag = ({ isOpen, setIsOpen, color }) => {
         <div className='p-6 border-t border-gray-200'>
           <div className='flex justify-between'>
             <span>Subtotal</span>
-            <span>
-              {/* Subtotal amount */}
-              {subtotal}$
-            </span>
+            <span className='font-semibold '>{subtotal}$</span>
           </div>
-          <div className='flex justify-center'>
-            <button className='w-full py-4 mt-4 text-white bg-blue-500 hover:bg-blue-700'>
-              Checkout
-            </button>
+          <div className='flex-row justify-center'>
+            <span className='text-xs text-gray-500 '>
+              Shipment cost will be calculated at the checkout
+            </span>
+            <Link href='/store/checkout'>
+              <button className='w-full py-4 mt-4 text-white bg-button-blue hover:bg-button-blue-hover'>
+                Checkout
+              </button>
+            </Link>
           </div>
         </div>
       </div>
