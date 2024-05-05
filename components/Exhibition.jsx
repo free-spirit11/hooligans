@@ -3,6 +3,7 @@ import Link from 'next/link';
 import ProductCard from './ProductCard';
 import { useState, useEffect } from 'react';
 import { fetchProducts } from '@/utils/requests';
+import AutoScrollContainer from './AutoScrollContainer';
 
 const Exhibition = ({ heading }) => {
   const [products, setProducts] = useState(null);
@@ -36,12 +37,12 @@ const Exhibition = ({ heading }) => {
             </button>
           </Link>
         </div>
-        <div className='inline-flex p-4 space-x-4 overflow-x-auto hide-scrollbar'>
+        <AutoScrollContainer>
           {products &&
             products.map((product, index) => (
               <ProductCard product={product} key={index} />
             ))}
-        </div>
+        </AutoScrollContainer>
       </div>
     </section>
   );

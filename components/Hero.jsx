@@ -7,9 +7,10 @@ const Hero = () => {
       <div className='absolute inset-0 bg-gray-950 bg-opacity-20'></div>
       <Navbar color='white' mainPage={true} />
       <div className='absolute inset-0 flex flex-col justify-center text-white'>
-        <h1 className='flex justify-around p-3 m-3 mt-40 text-8xl'>
-          Be your own rebel
+        <h1 className='flex justify-around p-3 m-3 mt-40 text-8xl '>
+          Don't pay retail Be hooligan
         </h1>
+
         <p className='flex justify-around'>
           Get summer ready with Hooligans. Find your perfect pair of subglasses.
         </p>

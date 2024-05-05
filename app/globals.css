@@ -36,6 +36,20 @@ h1,
   scrollbar-width: none; /* Firefox */
 }
 
+@keyframes pulse {
+  0%,
+  30%,
+  100% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.25);
+  }
+  35% {
+    transform: scale(1.2);
+  }
+}
+
 /* 
 :root {
   --foreground-rgb: 0, 0, 0;
