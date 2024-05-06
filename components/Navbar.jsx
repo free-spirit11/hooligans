@@ -11,8 +11,8 @@ const Navbar = ({ color, mainPage }) => {
   const [isShoppingBagOpen, setIsShoppingBagOpen] = useState(false);
 
   return (
-    <nav className='fixed z-10 flex items-center justify-between w-full px-10 py-4 bg-gray-200 bg-opacity-10 pt-7'>
-      {!isMenuOpen && mainPage ? (
+    <nav className='fixed z-10 flex items-center justify-between w-full px-10 py-4 pt-5 bg-custom-blue bg-opacity-90'>
+      {!isMenuOpen ? (
         <button
           type='button'
           id='menu-dropdown-button'
@@ -21,7 +21,6 @@ const Navbar = ({ color, mainPage }) => {
           aria-expanded='false'
           onClick={() => setIsMenuOpen((prev) => !prev)}
         >
-          {/* <Image className='' src={menuIcon} alt='menu' /> */}
           <svg
             width='24'
             height='16'
@@ -40,7 +39,7 @@ const Navbar = ({ color, mainPage }) => {
       ) : (
         <div className='px-12 m-1'></div>
       )}
-
+      {/* 
       {!mainPage && (
         <Link
           className='absolute inline-flex items-center px-5 py-3 rounded-md hover:bg-black hover:bg-opacity-10'
@@ -51,7 +50,7 @@ const Navbar = ({ color, mainPage }) => {
           </svg>
           <span className='text-xl text-black -translate-y-px '>Back</span>
         </Link>
-      )}
+      )} */}
 
       <div
         style={{

@@ -42,7 +42,7 @@ const ProductPage = () => {
 
   return (
     <section>
-      <Navbar color='black' mainPage={false} />
+      <Navbar color='black' />
       <div className='flex items-center w-full pt-24 '>
         {/* small images */}
         <div className='w-[10%] pl-10 pr-3 self-start'>

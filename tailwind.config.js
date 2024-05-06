@@ -35,6 +35,12 @@ module.exports = {
         'button-blue': '#2864A2',
         'button-blue-hover': '#1E4C7A',
       },
+      backgroundImage: {
+        'gradient-opacity':
+          'linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.2))',
+        'gradient-opacity-hover':
+          'linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0.2))',
+      },
     },
   },
   plugins: [],

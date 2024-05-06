@@ -18,22 +18,30 @@ const CustomAutoScrollContainer = ({ children }) => {
     arrows: false,
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'ArrowLeft') {
+      slider?.slickPrev();
+    } else if (event.key === 'ArrowRight') {
+      slider?.slickNext();
+    }
+  };
+
   return (
-    <div className='flex flex-col items-center'>
-      <div className='inline-flex justify-between'>
-        <button
-          className='flex px-4 py-2 m-1 text-white bg-gray-600 opacity-30 rounded-s-full hover:bg-gray-700'
-          onClick={() => slider?.slickPrev()}
-        >
-          <IoIosArrowBack className='size-10' />
-        </button>
-        <button
-          className='flex px-4 py-2 m-1 text-white bg-gray-600 opacity-30 rounded-e-full hover:bg-gray-700'
-          onClick={() => slider?.slickNext()}
-        >
-          <IoIosArrowForward className='size-10' />
-        </button>
-      </div>
+    <div className='relative'>
+      <button
+        className='absolute bottom-[50%] left-0 z-10 px-4 py-5 mx-7 text-white bg-black opacity-30 rounded-s-full hover:opacity-60'
+        onClick={() => slider?.slickPrev()}
+        onKeyDown={handleKeyDown}
+      >
+        <IoIosArrowBack className='size-10' />
+      </button>
+      <button
+        className='absolute bottom-[50%] right-0 z-10 px-4 py-5 mx-7 text-white bg-black  opacity-30 rounded-e-full hover:opacity-60'
+        onClick={() => slider?.slickNext()}
+        onKeyDown={handleKeyDown}
+      >
+        <IoIosArrowForward className='size-10' />
+      </button>
 
       <motion.div
         className='w-full'
