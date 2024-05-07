@@ -5,7 +5,7 @@ import React from 'react';
 const StorePage = () => {
   return (
     <>
-      <Navbar color='white' />
+      <Navbar color='black' />
       <div className='flex-col pt-20 max-w-[70%] mx-auto space-y-5'>
         <div name='title'>
           <h1 className='mt-32 text-2xl '>All products</h1>

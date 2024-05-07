@@ -5,16 +5,17 @@ const Hero = () => {
   return (
     <section className='relative h-screen overflow-hidden'>
       <div className='absolute inset-0 bg-gray-950 bg-opacity-20'></div>
-      <Navbar color='white' mainPage={true} />
+      <Navbar color='black' mainPage={true} />
       <div className='absolute inset-0 flex flex-col justify-center text-white'>
         <h1 className='flex justify-around p-3 m-3 mt-40 text-8xl '>
-          Don't pay retail Be hooligan
+          Don't pay retail
         </h1>
+        <h1 className='flex justify-around p-3 m-3 text-8xl '>Be hooligan</h1>
 
         <p className='flex justify-around'>
           Get summer ready with Hooligans. Find your perfect pair of subglasses.
         </p>
-        <Link href='/store/category/57' className='flex justify-around'>
+        <Link href='/store' className='flex mx-auto'>
           <button className='py-4 mt-6 text-xs border px-7 hover:bg-gray-500 hover:bg-opacity-20'>
             Shop now and get your shades on
           </button>

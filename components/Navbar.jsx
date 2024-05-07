@@ -11,7 +11,7 @@ const Navbar = ({ color, mainPage }) => {
   const [isShoppingBagOpen, setIsShoppingBagOpen] = useState(false);
 
   return (
-    <nav className='fixed z-10 flex items-center justify-between w-full px-10 py-4 pt-5 bg-custom-blue bg-opacity-90'>
+    <nav className='fixed z-10 flex items-center justify-between w-full px-10 py-4 pt-3 shadow-2xl bg-opacity-30 bg-stone-300'>
       {!isMenuOpen ? (
         <button
           type='button'
@@ -37,7 +37,7 @@ const Navbar = ({ color, mainPage }) => {
           <span className={`px-3 text-${color}`}>Menu</span>
         </button>
       ) : (
-        <div className='px-12 m-1'></div>
+        <div className='py-6'></div>
       )}
       {/* 
       {!mainPage && (

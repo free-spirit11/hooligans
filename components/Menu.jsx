@@ -5,7 +5,7 @@ const Menu = ({ setIsMenuOpen, color }) => {
   return (
     <div className='fixed inset-0 z-10 flex flex-col justify-start bg-black bg-opacity-60'>
       <button
-        className={`inline-flex items-center self-start px-4 py-2 pb-2 mb-5 text-lg text-${color} rounded-md mt-7 ml-11`}
+        className={`inline-flex items-center self-start px-4 py-2 pb-2 mb-5 text-lg text-${color} rounded-md mt-4 ml-11`}
         onClick={() => setIsMenuOpen((prev) => !prev)}
       >
         <svg
@@ -23,7 +23,7 @@ const Menu = ({ setIsMenuOpen, color }) => {
           />
         </svg>
 
-        <span className='px-2'>Close</span>
+        <span className='px-3 text-base'>Close</span>
       </button>
       <div className='self-start p-10 pr-20 ml-12 bg-white shadow-lg'>
         <div className='flex flex-col justify-start'>
