@@ -12,7 +12,7 @@ const Exhibition = ({ heading }) => {
     const fetchProductsData = async () => {
       try {
         const fetchedProducts = await fetchProducts();
-        setProducts(fetchedProducts);
+        setProducts(fetchedProducts.products);
       } catch (error) {
         console.error('Error fetching product:', error);
       }

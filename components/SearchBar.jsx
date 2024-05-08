@@ -10,7 +10,7 @@ const SearchBar = ({ color }) => {
         id='search-input'
         placeholder='Search'
         className={`pl-4 pr-8 bg-transparent text-${color} placeholder-${color} outline-none transition-all duration-500 ease-in-out origin-right ${
-          isExpanded ? 'w-48 border-b-2 border-gray-300' : 'w-0 border-none'
+          isExpanded ? 'w-48 border-b-2 border-black' : 'w-0 border-none'
         } h-10`}
         onFocus={() => setIsExpanded(true)}
         onBlur={() => setIsExpanded(false)}

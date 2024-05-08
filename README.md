@@ -51,3 +51,5 @@ Next todo:
 4. Auth
 5. Proper pics display on product page
 6. Show navigation on the products page
+7. Make lines appear under the menu options
+8. Navbar being transparent with white text on hero and changing to color and black text when scrolling down to other components or on other pages (https://www.urby.com/) (with slow transition)

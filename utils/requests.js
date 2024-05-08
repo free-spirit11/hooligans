@@ -1,29 +1,33 @@
 const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN || null;
 
-//Fetch all products
-async function fetchProducts({ showWishlist = false } = {}) {
+// Fetch all products
+async function fetchProducts(showWishlist = false, page, pageSize) {
   try {
-    //Handle the case where the domain is not available yet
+    // Handle the case where the domain is not available yet
     if (!apiDomain) {
       return [];
     }
 
-    const res = await fetch(
-      `${apiDomain}/products${showWishlist ? '/wishlist' : ''}`,
-      {
-        cache: 'no-store',
-      }
-    );
+    let url = `${apiDomain}/products`;
+    if (showWishlist) {
+      url += '/wishlist';
+    } else {
+      const params = [];
+      if (page !== undefined) params.push(`page=${page}`);
+      if (pageSize !== undefined) params.push(`pageSize=${pageSize}`);
+      if (params.length > 0) url += `?${params.join('&')}`;
+    }
+
+    const res = await fetch(url, { cache: 'no-store' });
 
     if (!res.ok) {
       throw new Error('Failed to fetch data');
     }
 
     const data = await res.json();
-
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return [];
   }
 }

@@ -5,14 +5,19 @@ import ProductCard from './ProductCard';
 
 const ProductsGrid = () => {
   const [products, setProducts] = useState(null);
+  const [page, setPage] = useState(null);
+  const [pageSize, setPageSize] = useState(null);
 
   useEffect(() => {
     const fetchProductsData = async () => {
       try {
-        const fetchedProducts = await fetchProducts();
-        setProducts(fetchedProducts);
+        const fetchedProducts = await fetchProducts(page, pageSize);
+
+        console.log(fetchedProducts);
+
+        setProducts(fetchedProducts.products);
       } catch (error) {
-        console.error('Error fetching product:', error);
+        console.error('Error fetching products:', error);
       }
       // do loading spinner later
       //   finally {

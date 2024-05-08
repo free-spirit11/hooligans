@@ -6,11 +6,21 @@ export const GET = async (request) => {
   try {
     await connectDB();
 
-    const products = await Product.find({});
+    const page = request.nextUrl.searchParams.get('page') || 1;
+    const pageSize = request.nextUrl.searchParams.get('pageSize') || 6;
+    const skip = (page - 1) * pageSize;
 
+    const total = await Product.countDocuments({});
+
+    const products = await Product.find({}).skip(skip).limit(pageSize);
     if (!products) return new Response('Products Not Found', { status: 404 });
 
-    return new Response(JSON.stringify(products), {
+    const result = {
+      total,
+      products,
+    };
+
+    return new Response(JSON.stringify(result), {
       status: 200,
     });
   } catch (error) {
