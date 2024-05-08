@@ -9,7 +9,7 @@ const WishlistPage = () => {
 
   return (
     <>
-      <Navbar color='white' mainPage={false} />
+      <Navbar color='black' mainPage={false} />
       <section className='flex flex-col min-h-screen pt-24 bg-gray-100'>
         <div className='container flex-1 mx-auto'>
           <table className='w-full text-left border-collapse'>

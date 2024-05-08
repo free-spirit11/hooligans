@@ -45,7 +45,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 Next todo:
 
-1. Sorting, pagination, filter
+1. Sorting, pagination+, filter
 2. Search
 3. Payments
 4. Auth

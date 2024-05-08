@@ -10,7 +10,7 @@ import { useShoppingBagContext } from '@/contexts/ShoppingBagContext';
 const ProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const { addItemToBag } = useShoppingBagContext();
+  const { addItemToBag, addWishlistItem } = useShoppingBagContext();
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -98,7 +98,10 @@ const ProductPage = () => {
             >
               Add to cart
             </button>
-            <button className='h-10 m-1 text-sm font-light text-black border border-black w-450px hover:bg-blue-800'>
+            <button
+              className='h-10 m-1 text-sm font-light text-black border border-black w-450px hover:bg-blue-800'
+              onClick={() => addWishlistItem(product)}
+            >
               Add to wishlist
             </button>
           </div>

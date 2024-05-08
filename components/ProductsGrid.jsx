@@ -2,11 +2,13 @@
 import { useState, useEffect } from 'react';
 import { fetchProducts } from '@/utils/requests';
 import ProductCard from './ProductCard';
+import Pagination from './Pagination';
 
 const ProductsGrid = () => {
   const [products, setProducts] = useState(null);
-  const [page, setPage] = useState(null);
-  const [pageSize, setPageSize] = useState(null);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(3);
+  const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
     const fetchProductsData = async () => {
@@ -16,6 +18,7 @@ const ProductsGrid = () => {
         console.log(fetchedProducts);
 
         setProducts(fetchedProducts.products);
+        setTotalItems(fetchedProducts.total);
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -24,17 +27,41 @@ const ProductsGrid = () => {
       //     setLoading(false);
       //   }
     };
-    if (products === null) {
-      fetchProductsData();
-    }
-  }, []);
+
+    fetchProductsData();
+  }, [page, pageSize]);
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
+
+  const handlePageSizeChange = (newPageSize) => {
+    setPageSize(newPageSize);
+    setPage(1);
+  };
 
   return (
-    <div className='grid grid-cols-3'>
-      {products &&
-        products.map((product, index) => (
-          <ProductCard product={product} key={index} />
-        ))}
+    <div>
+      <Pagination
+        page={page}
+        pageSize={pageSize}
+        totalItems={totalItems}
+        onPageChange={handlePageChange}
+        onPageSizeChange={handlePageSizeChange}
+      />
+      <div className='grid grid-cols-3'>
+        {products &&
+          products.map((product, index) => (
+            <ProductCard product={product} key={index} />
+          ))}
+      </div>
+      <Pagination
+        page={page}
+        pageSize={pageSize}
+        totalItems={totalItems}
+        onPageChange={handlePageChange}
+        onPageSizeChange={handlePageSizeChange}
+      />
     </div>
   );
 };

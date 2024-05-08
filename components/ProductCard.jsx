@@ -24,14 +24,14 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className='min-w-[24%] mx-[11px] px-2 py-10'>
-      <div className='relative transition-transform duration-500 shadow-lg hover:opacity-90 hover:scale-110 '>
+      <div className='relative overflow-hidden shadow-lg hover:opacity-90 bg-custom-gray'>
         <Link href={`/store/product/${product._id}`}>
           <Image
-            className='w-full h-auto bg-custom-gray'
+            className='w-[85%] h-[85%] mx-auto translate-y-4 transition-transform duration-500  hover:scale-110'
             src={firstPngImage}
             alt='Glasses product image'
-            width={0}
-            height={0}
+            width={200}
+            height={200}
             sizes='100vw'
           />
         </Link>
