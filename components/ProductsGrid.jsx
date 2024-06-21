@@ -7,7 +7,7 @@ import Pagination from './Pagination';
 const ProductsGrid = () => {
   const [products, setProducts] = useState(null);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(3);
+  const [pageSize, setPageSize] = useState(9);
   const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
