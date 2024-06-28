@@ -10,10 +10,7 @@ const StorePage = () => {
         <div name='title'>
           <h1 className='mt-32 text-4xl '>All products</h1>
         </div>
-        <div name='sorting, filters, pagination'>
-          <span>Sort Filter ...</span>
-          <span></span>
-        </div>
+
         <ProductsGrid />
       </div>
     </>
