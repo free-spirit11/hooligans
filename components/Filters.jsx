@@ -67,7 +67,7 @@ const Filters = () => {
   const [filter, setFilter] = useState({
     color: ['all'],
     brand: ['all'],
-    // price: { isCustom: false, range: DEFAULT_CUSTOM_PRICE },
+    price: { range: DEFAULT_CUSTOM_PRICE },
     // sort: 'none',
   });
 
@@ -97,8 +97,8 @@ const Filters = () => {
     }
   };
 
-  // const minPrice = Math.min(filter.price.range[0], filter.price.range[1]);
-  // const maxPrice = Math.max(filter.price.range[0], filter.price.range[1]);
+  const minPrice = Math.min(filter.price.range[0], filter.price.range[1]);
+  const maxPrice = Math.max(filter.price.range[0], filter.price.range[1]);
 
   return (
     <main className='max-w-[90%] px-4 mx-auto sm:px-6 lg:px-8'>
@@ -225,14 +225,14 @@ const Filters = () => {
               </AccordionItem>
 
               {/* Price filter */}
-              {/* <AccordionItem value='price'>
+              <AccordionItem value='price'>
                 <AccordionTrigger className='py-3 text-sm text-gray-400 hover:text-gray-500'>
                   <span className='font-medium text-gray-900'>Price</span>
                 </AccordionTrigger>
 
                 <AccordionContent className='pt-6 animate-none'>
                   <ul className='space-y-4'>
-                    {PRICE_FILTERS.options.map((option, optionIdx) => (
+                    {/* {PRICE_FILTERS.options.map((option, optionIdx) => (
                       <li key={option.label} className='flex items-center'>
                         <input
                           type='radio'
@@ -260,10 +260,10 @@ const Filters = () => {
                           {option.label}
                         </label>
                       </li>
-                    ))}
+                    ))} */}
 
                     <li className='flex-col gap-2 flex-justify-center'>
-                      <div>
+                      {/* <div>
                         <input
                           type='radio'
                           id={`price-${PRICE_FILTERS.options.length}`}
@@ -285,42 +285,27 @@ const Filters = () => {
                         >
                           Custom
                         </label>
-                      </div>
+                      </div> */}
 
                       <div className='flex justify-between my-3'>
                         <p className='font-medium'>Price</p>
                         <div>
-                          {filter.price.isCustom
-                            ? minPrice.toFixed(0)
-                            : filter.price.range[0].toFixed(0)}{' '}
-                          $ -{' '}
-                          {filter.price.isCustom
-                            ? maxPrice.toFixed(0)
-                            : filter.price.range[1].toFixed(0)}{' '}
-                          $
+                          {filter.price.range[0].toFixed(0)} $ -{' '}
+                          {filter.price.range[1].toFixed(0)} $
                         </div>
                       </div>
 
                       <Slider
-                        className={cn({
-                          'opacity-50': !filter.price.isCustom,
-                        })}
-                        disabled={!filter.price.isCustom}
                         onValueChange={(range) => {
                           const [newMin, newMax] = range;
                           setFilter((prev) => ({
                             ...prev,
                             price: {
-                              isCustom: true,
                               range: [newMin, newMax],
                             },
                           }));
                         }}
-                        value={
-                          filter.price.isCustom
-                            ? filter.price.range
-                            : DEFAULT_CUSTOM_PRICE
-                        }
+                        value={filter.price.range}
                         min={DEFAULT_CUSTOM_PRICE[0]}
                         defaultValue={DEFAULT_CUSTOM_PRICE}
                         max={DEFAULT_CUSTOM_PRICE[1]}
@@ -329,7 +314,7 @@ const Filters = () => {
                     </li>
                   </ul>
                 </AccordionContent>
-              </AccordionItem> */}
+              </AccordionItem>
             </Accordion>
           </div>
 

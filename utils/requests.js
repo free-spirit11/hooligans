@@ -23,11 +23,11 @@ async function fetchProducts(page, pageSize, filter) {
     if (filter.color !== undefined && !filter.color.includes('all')) {
       filter.color.forEach((color) => url.searchParams.append('color', color));
     }
+    if (filter.price) {
+      url.searchParams.append('priceMin', filter.price.range[0]);
+      url.searchParams.append('priceMax', filter.price.range[1]);
+    }
 
-    // if (filter.price) {
-    //   url.searchParams.append('priceMin', filter.price.range[0]);
-    //   url.searchParams.append('priceMax', filter.price.range[1]);
-    // }
     // if (filter.sort !== 'none') {
     //   url.searchParams.append('sort', filter.sort);
     // }

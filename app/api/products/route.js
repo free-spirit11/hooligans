@@ -15,6 +15,8 @@ export const GET = async (request) => {
     const colors = searchParams.getAll('color');
     const isAllBrandsSelected = brands.includes('all');
     const isAllColorsSelected = colors.includes('all');
+    const priceMin = Number(searchParams.get('priceMin')) || 0;
+    const priceMax = Number(searchParams.get('priceMax')) || 1000;
 
     let query = {};
 
@@ -27,6 +29,11 @@ export const GET = async (request) => {
       const colorSearch = colors.map((color) => new RegExp(color, 'i'));
       query.color = { $in: colorSearch };
     }
+
+    query.price = {
+      $gte: priceMin,
+      $lte: priceMax + 1,
+    };
 
     const total = await Product.countDocuments(query);
 
