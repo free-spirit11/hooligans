@@ -4,7 +4,7 @@ import { fetchProducts } from '@/utils/requests';
 import ProductCard from './ProductCard';
 import Pagination from './Pagination';
 
-const ProductsGrid = () => {
+const ProductsGrid = ({ filter }) => {
   const [products, setProducts] = useState(null);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(9);
@@ -13,7 +13,7 @@ const ProductsGrid = () => {
   useEffect(() => {
     const fetchProductsData = async () => {
       try {
-        const fetchedProducts = await fetchProducts(page, pageSize);
+        const fetchedProducts = await fetchProducts(page, pageSize, filter);
 
         console.log(fetchedProducts);
 
@@ -29,7 +29,7 @@ const ProductsGrid = () => {
     };
 
     fetchProductsData();
-  }, [page, pageSize]);
+  }, [page, pageSize, filter]);
 
   const handlePageChange = (newPage) => {
     setPage(newPage);

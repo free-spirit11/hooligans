@@ -25,11 +25,23 @@ const COLOR_FILTERS = {
   id: 'color',
   name: 'Color',
   options: [
-    { value: 'white', label: 'White' },
-    { value: 'beige', label: 'Beige' },
-    { value: 'blue', label: 'Blue' },
-    { value: 'green', label: 'Green' },
-    { value: 'purple', label: 'Purple' },
+    { value: 'all', label: 'All Colors' },
+    { value: 'black', label: 'Black' },
+    { value: 'grey', label: 'Grey' },
+    { value: 'gold', label: 'Gold' },
+    { value: 'brown', label: 'Brown' },
+  ],
+};
+
+const BRAND_FILTERS = {
+  id: 'brand',
+  name: 'Brand',
+  options: [
+    { value: 'all', label: 'All Brands' },
+    { value: 'prada', label: 'Prada' },
+    { value: 'gucci', label: 'GUCCI' },
+    { value: 'saint laurent', label: 'Saint Laurent' },
+    { value: 'balenciaga', label: 'Balenciaga' },
   ],
 };
 
@@ -37,46 +49,56 @@ const PRICE_FILTERS = {
   id: 'price',
   name: 'Price',
   options: [
-    { value: [0, 100], label: 'Any price' },
-    { value: [0, 20], label: 'Under 20$' },
-    { value: [0, 40], label: 'Under 40$' },
+    { value: [0, 1000], label: 'Any price' },
+    { value: [0, 200], label: 'Under 200$' },
+    { value: [0, 400], label: 'Under 400$' },
     // custom option in JSX
   ],
 };
 
 const SUBCATEGORIES = [
-  { name: 'T-Shirts', selected: true, href: '#' },
-  { name: 'Hoodies', selected: false, href: '#' },
-  { name: 'Sweartshirts', selected: false, href: '#' },
+  { name: 'Sunglasses', selected: true, href: '#' },
+  { name: 'Eyeglasses', selected: false, href: '#' },
 ];
 
-const DEFAULT_CUSTOM_PRICE = [0, 100];
+const DEFAULT_CUSTOM_PRICE = [0, 1000];
 
 const Filters = () => {
   const [filter, setFilter] = useState({
-    color: ['beige', 'blue', 'green', 'purple', 'white'],
-    price: { isCustom: false, range: DEFAULT_CUSTOM_PRICE },
-    sort: 'none',
+    color: ['all'],
+    brand: ['all'],
+    // price: { isCustom: false, range: DEFAULT_CUSTOM_PRICE },
+    // sort: 'none',
   });
 
   const applyArrayFilter = ({ category, value }) => {
-    const isFilterApplied = filter[category].includes(value);
-
-    if (isFilterApplied) {
+    if (value === 'all') {
       setFilter((prev) => ({
         ...prev,
-        [category]: prev[category].filter((v) => v !== value),
+        [category]: ['all'],
       }));
     } else {
-      setFilter((prev) => ({
-        ...prev,
-        [category]: [...prev[category], value],
-      }));
+      setFilter((prev) => {
+        const isAllSelected = prev[category].includes('all');
+        const isFilterApplied = prev[category].includes(value);
+
+        if (isFilterApplied) {
+          return {
+            ...prev,
+            [category]: prev[category].filter((v) => v !== value),
+          };
+        } else {
+          return {
+            ...prev,
+            [category]: isAllSelected ? [value] : [...prev[category], value],
+          };
+        }
+      });
     }
   };
 
-  const minPrice = Math.min(filter.price.range[0], filter.price.range[1]);
-  const maxPrice = Math.max(filter.price.range[0], filter.price.range[1]);
+  // const minPrice = Math.min(filter.price.range[0], filter.price.range[1]);
+  // const maxPrice = Math.max(filter.price.range[0], filter.price.range[1]);
 
   return (
     <main className='max-w-[90%] px-4 mx-auto sm:px-6 lg:px-8'>
@@ -137,7 +159,7 @@ const Filters = () => {
               {/* Color filter */}
               <AccordionItem value='color'>
                 <AccordionTrigger className='py-3 text-sm text-gray-400 hover:text-gray-500'>
-                  <span className='font-medium text-gray-900'>Color</span>
+                  <span className='font-medium text-gray-900'>Colors</span>
                 </AccordionTrigger>
 
                 <AccordionContent className='pt-6 animate-none'>
@@ -168,8 +190,42 @@ const Filters = () => {
                 </AccordionContent>
               </AccordionItem>
 
-              {/* Prize filter */}
-              <AccordionItem value='price'>
+              {/* Brand filter */}
+              <AccordionItem value='brand'>
+                <AccordionTrigger className='py-3 text-sm text-gray-400 hover:text-gray-500'>
+                  <span className='font-medium text-gray-900'>Brands</span>
+                </AccordionTrigger>
+
+                <AccordionContent className='pt-6 animate-none'>
+                  <ul className='space-y-4'>
+                    {BRAND_FILTERS.options.map((option, optionIdx) => (
+                      <li key={option.value} className='flex items-center'>
+                        <input
+                          type='checkbox'
+                          id={`brand-${optionIdx}`}
+                          onChange={() => {
+                            applyArrayFilter({
+                              category: 'brand',
+                              value: option.value,
+                            });
+                          }}
+                          checked={filter.brand.includes(option.value)}
+                          className='w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500'
+                        />
+                        <label
+                          htmlFor={`brand-${optionIdx}`}
+                          className='ml-3 text-sm text-gray-600 '
+                        >
+                          {option.label}
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+
+              {/* Price filter */}
+              {/* <AccordionItem value='price'>
                 <AccordionTrigger className='py-3 text-sm text-gray-400 hover:text-gray-500'>
                   <span className='font-medium text-gray-900'>Price</span>
                 </AccordionTrigger>
@@ -273,14 +329,14 @@ const Filters = () => {
                     </li>
                   </ul>
                 </AccordionContent>
-              </AccordionItem>
+              </AccordionItem> */}
             </Accordion>
           </div>
 
           {/* Product grid */}
 
           <div className='lg:col-span-3'>
-            <ProductsGrid />
+            <ProductsGrid filter={filter} />
           </div>
         </div>
       </section>
