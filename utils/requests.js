@@ -3,7 +3,7 @@ const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN || null;
 // My version with filters:
 
 // Fetch all products
-async function fetchProducts(page, pageSize, filter) {
+async function fetchProducts(page, pageSize, filter = {}) {
   try {
     // Handle the case where the domain is not available yet
     if (!apiDomain) {

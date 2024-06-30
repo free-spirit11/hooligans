@@ -30,9 +30,16 @@ export const GET = async (request) => {
       query.color = { $in: colorSearch };
     }
 
-    query.price = {
-      $gte: priceMin,
-      $lte: priceMax + 1,
+    // query.price = {
+    //   $gte: priceMin,
+    //   $lte: priceMax + 1,
+    // };
+
+    query.$expr = {
+      $and: [
+        { $gte: [{ $toDouble: '$price' }, priceMin] },
+        { $lte: [{ $toDouble: '$price' }, priceMax] },
+      ],
     };
 
     const total = await Product.countDocuments(query);
