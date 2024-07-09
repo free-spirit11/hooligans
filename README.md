@@ -45,7 +45,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 Next todo:
 
-1. Sorting, pagination+, filter
+1. Sorting, pagination+, filter+
 2. Search
 3. Payments
 4. Auth
@@ -53,3 +53,13 @@ Next todo:
 6. Show navigation on the products page
 7. Make lines appear under the menu options
 8. Navbar being transparent with white text on hero and changing to color and black text when scrolling down to other components or on other pages (https://www.urby.com/) (with slow transition)
+9. Integrate with headles CMS (Content management system)
+10. SEO and Metadata
+11. nice dynamic changing header (banner) and banners on products page
+12. Implement emails ...
+13. Video banner
+14. Migrate to TypeScript
+
+---
+
+Next step: integrate with medusa
