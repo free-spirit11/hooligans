@@ -9,7 +9,8 @@ const ProductCard = ({ product }) => {
     useShoppingBagContext();
   const [animate, setAnimate] = useState(false);
 
-  const firstPngImage = product.images.find((image) => image.endsWith('.png'));
+  // const firstPngImage = product.images.find((image) => image.endsWith('.png'));
+  const firstPngImage = product.thumbnail;
 
   const handleWishlistClick = (product) => {
     const isWishlist = wishlistItems.some((item) => item._id === product._id);
@@ -25,7 +26,7 @@ const ProductCard = ({ product }) => {
   return (
     <div className='min-w-[24%] mx-[11px] px-2 py-10'>
       <div className='relative overflow-hidden shadow-lg hover:opacity-90 bg-custom-gray'>
-        <Link href={`/store/product/${product._id}`}>
+        <Link href={`/store/product/${product.id}`}>
           <Image
             className='w-[85%] h-[85%] mx-auto translate-y-4 transition-transform duration-500  hover:scale-110'
             src={firstPngImage}
@@ -51,7 +52,7 @@ const ProductCard = ({ product }) => {
               strokeWidth='2'
               fill={
                 wishlistItems.some(
-                  (wishlistItem) => wishlistItem._id === product._id
+                  (wishlistItem) => wishlistItem._id === product.id
                 )
                   ? 'black'
                   : 'none'
@@ -61,14 +62,17 @@ const ProductCard = ({ product }) => {
         </button>
       </div>
       <div className='font-serif '>
-        <Link href={`/store/product/${product._id}`}>
-          <h3 className='p-1 mt-3'>{product.model}</h3>
+        <Link href={`/store/product/${product.id}`}>
+          <h3 className='p-1 mt-3'>{product.subtitle}</h3>
           <h2 className='p-1'>
-            {product.brand} {product.model} {product.color}
+            {product.title} {product.subtitle}
+            {/* {product.color} */}
           </h2>
         </Link>
         <div className='p-1'>
-          <span className='pr-2'>${product.price}</span>
+          <span className='pr-2'>
+            ${product.variants[0]?.prices[0]?.amount / 100}
+          </span>
           {product.sale && <span className='text-red-500'>On Sale</span>}
         </div>
       </div>
