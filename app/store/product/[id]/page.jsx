@@ -11,6 +11,7 @@ import { useProduct } from 'medusa-react';
 const ProductPage = () => {
   const { id } = useParams();
   const { product, isLoading, error } = useProduct(id);
+  console.log(product);
   // const [product, setProduct] = useState(null);
   const { addItemToBag, addWishlistItem } = useShoppingBagContext();
 

@@ -6,6 +6,7 @@ import { useProducts } from 'medusa-react';
 
 const Exhibition = ({ heading }) => {
   const { products, isLoading, error } = useProducts();
+  // {    expand: 'brand,model',}
 
   console.log(products);
 
