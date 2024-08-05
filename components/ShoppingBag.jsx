@@ -1,18 +1,77 @@
 'use client';
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import ShoppingBagItem from './ShoppingBagItem';
 import { useShoppingBagContext } from '@/contexts/ShoppingBagContext';
+import { useCart } from 'medusa-react';
+import CartDBUpdater from './CartDBUpdater';
+import { useRouter } from 'next/navigation';
 
-const ShoppingBag = ({ isOpen, setIsOpen, color }) => {
-  const { shoppingBagItems, subtotal, totalQuantity } = useShoppingBagContext();
+const ShoppingBag = ({ color }) => {
+  const router = useRouter();
+
+  // const [cartId, setCartId] = useState(null);
+  const {
+    shoppingBagItems,
+    subtotal,
+    totalQuantity,
+    isShoppingBagOpened,
+    setIsShoppingBagOpened,
+    cartId,
+    setCartId,
+  } = useShoppingBagContext();
+  const { createCart } = useCart(cartId);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    // const storedCartId = localStorage.getItem('cart_id');
+    // if (storedCartId) {
+    //   setCartId(storedCartId);
+    // }
+  }, []);
+
+  const handleCartCreation = () => {
+    if (!cartId) {
+      const itemsToAdd = [];
+
+      shoppingBagItems.forEach((shoppingBagItem) => {
+        itemsToAdd.push({
+          variant_id: shoppingBagItem.variants[0].id,
+          quantity: shoppingBagItem.quantity,
+        });
+      });
+
+      createCart.mutate(
+        {
+          items: itemsToAdd,
+        },
+        {
+          onSuccess: ({ cart }) => {
+            localStorage.setItem('cart_id', cart.id);
+            setCartId(cart.id);
+            console.log('Cart has been created', cart);
+            router.push('/store/checkout');
+            setIsShoppingBagOpened(!isShoppingBagOpened);
+          },
+          onError: (error) => {
+            console.error('Error creating cart:', error);
+          },
+        }
+      );
+    }
+  };
+
+  if (!isClient) {
+    return null; // or a loading spinner
+  }
 
   return (
     <>
-      {!isOpen && (
+      {!isShoppingBagOpened && (
         <button
           className='flex'
           name='Shopping bag nav button'
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsShoppingBagOpened(!isShoppingBagOpened)}
         >
           <svg
             width='17'
@@ -31,7 +90,7 @@ const ShoppingBag = ({ isOpen, setIsOpen, color }) => {
       )}
       <div
         className={`p-4 fixed inset-y-0 right-0 w-450px bg-custom-gray z-30 transform ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
+          isShoppingBagOpened ? 'translate-x-0' : 'translate-x-full'
         } transition-transform duration-500 ease-in-out flex flex-col`}
       >
         <div className='flex items-center justify-between p-6 border-b border-gray-200'>
@@ -40,7 +99,7 @@ const ShoppingBag = ({ isOpen, setIsOpen, color }) => {
             {totalQuantity}
           </span>
 
-          <button onClick={() => setIsOpen(!isOpen)}>
+          <button onClick={() => setIsShoppingBagOpened(!isShoppingBagOpened)}>
             <svg
               width='24'
               height='19'
@@ -76,11 +135,21 @@ const ShoppingBag = ({ isOpen, setIsOpen, color }) => {
             <span className='text-xs text-gray-500 '>
               Shipment cost will be calculated at the checkout
             </span>
-            <Link href='/store/checkout'>
-              <button className='w-full py-4 mt-4 text-white bg-button-blue hover:bg-button-blue-hover'>
+            {cartId ? (
+              <CartDBUpdater
+                cartId={cartId}
+                tailwindCl='w-full py-4 mt-4 text-white bg-button-blue hover:bg-button-blue-hover'
+                buttonName='Checkout'
+                routeToGo='/store/checkout'
+              />
+            ) : (
+              <button
+                className='w-full py-4 mt-4 text-white bg-button-blue hover:bg-button-blue-hover'
+                onClick={handleCartCreation}
+              >
                 Checkout
               </button>
-            </Link>
+            )}
           </div>
         </div>
       </div>

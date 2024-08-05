@@ -4,11 +4,12 @@ import Link from 'next/link';
 import Menu from './Menu';
 import SearchBar from './SearchBar';
 import ShoppingBag from './ShoppingBag';
+import { useShoppingBagContext } from '@/contexts/ShoppingBagContext';
 
 // Thinking to add a prop which would tell if all the svg elements are white or black, to change it on the main page being transparent and white text and on other pages being white with black text
 const Navbar = ({ color, mainPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isShoppingBagOpen, setIsShoppingBagOpen] = useState(false);
+  const { isShoppingBagOpened } = useShoppingBagContext();
 
   return (
     <nav className='fixed z-10 flex items-center justify-between w-full px-10 py-4 pt-3 shadow-2xl bg-opacity-30 bg-stone-300'>
@@ -160,15 +161,11 @@ const Navbar = ({ color, mainPage }) => {
         </Link>
 
         <div>
-          <ShoppingBag
-            color={color}
-            isOpen={isShoppingBagOpen}
-            setIsOpen={setIsShoppingBagOpen}
-          />
+          <ShoppingBag color={color} />
         </div>
       </div>
       {isMenuOpen && <Menu color={color} setIsMenuOpen={setIsMenuOpen} />}
-      {isShoppingBagOpen && (
+      {isShoppingBagOpened && (
         <div className='fixed inset-0 z-20 bg-black bg-opacity-50'></div>
       )}
     </nav>

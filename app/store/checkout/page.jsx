@@ -1,6 +1,5 @@
 'use client';
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Information from '@/components/CheckoutStep-Information';
 import Shipping from '@/components/CheckoutStep-Shipping.jsx';
 import Payment from '@/components/CheckoutStep-Payment';
@@ -10,7 +9,18 @@ import StepNavigation from '@/components/SheckoutStepNavigarion';
 
 const CheckoutPage = () => {
   const [step, setStep] = useState(1);
-  const { shoppingBagItems, subtotal, totalQuantity } = useShoppingBagContext();
+  const { shoppingBagItems, subtotal, totalQuantity, cartId } =
+    useShoppingBagContext();
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null; // or a loading spinner
+  }
 
   return (
     <section className='grid grid-cols-2'>
@@ -27,7 +37,7 @@ const CheckoutPage = () => {
               fill='none'
               xmlns='http://www.w3.org/2000/svg'
             >
-              <g id='logo' clip-path='url(#clip0_36_369)'>
+              <g id='logo' clipPath='url(#clip0_36_369)'>
                 <g id='Group'>
                   <path
                     id='Vector'
@@ -81,11 +91,19 @@ const CheckoutPage = () => {
           <div className='container mx-auto'>
             <StepNavigation currentStep={step} />
             <div className='py-5'>Contact information</div>
-            {step === 1 && <Information onNext={() => setStep(2)} />}
-            {step === 2 && (
-              <Shipping onNext={() => setStep(3)} onBack={() => setStep(1)} />
+            {step === 1 && (
+              <Information onNext={() => setStep(2)} cartId={cartId} />
             )}
-            {step === 3 && <Payment onBack={() => setStep(2)} />}
+            {step === 2 && (
+              <Shipping
+                onNext={() => setStep(3)}
+                onBack={() => setStep(1)}
+                cartId={cartId}
+              />
+            )}
+            {step === 3 && (
+              <Payment onBack={() => setStep(2)} cartId={cartId} />
+            )}
           </div>
         </div>
       </div>

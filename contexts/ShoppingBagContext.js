@@ -35,32 +35,57 @@ const removeFromWishlist = (wishlistItems, productToRemove) => {
 };
 
 const ShoppingBagContext = createContext({
+  shoppingBagOpened: false,
   shoppingBagItems: [],
   subtotal: 0,
   totalQuantity: 0,
   wishlistItems: [],
+  cartId: null,
 });
 
 export function ShoppingBagProvider({ children }) {
-  const [shoppingBagItems, setShoppingBagItems] = useState([]);
+  const [shoppingBagItems, setShoppingBagItems] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const savedBagItems = localStorage.getItem('shoppingBagItems');
+      return savedBagItems ? JSON.parse(savedBagItems) : [];
+    }
+    return [];
+  });
+
   const [subtotal, setSubtotal] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [wishlistItems, setWishlistItems] = useState([]);
 
+  const [isShoppingBagOpened, setIsShoppingBagOpened] = useState(false);
+
+  const [cartId, setCartId] = useState(null);
+
+  useEffect(() => {
+    const storedCartId = localStorage.getItem('cart_id');
+    if (storedCartId) {
+      setCartId(storedCartId);
+    }
+  }, [cartId]);
+
   useEffect(() => {
     const newSubtotal = shoppingBagItems.reduce((total, item) => {
-      return total + item.price * item.quantity;
+      return (
+        total + (item.variants[0]?.prices[0]?.amount / 100) * item.quantity
+      );
     }, 0);
     const newQuantity = shoppingBagItems.reduce((totalQuantity, item) => {
       return totalQuantity + item.quantity;
     }, 0);
     setTotalQuantity(newQuantity);
     setSubtotal(newSubtotal);
+    localStorage.setItem('shoppingBagItems', JSON.stringify(shoppingBagItems));
   }, [shoppingBagItems]);
 
   const addItemToBag = (productToAdd) => {
     setShoppingBagItems(addToBag(shoppingBagItems, productToAdd));
-    toast.success('Item added to the Shopping Bag successfully');
+    if (!isShoppingBagOpened) {
+      toast.success('Item added to the Shopping Bag successfully');
+    }
   };
   const removeItemFromBag = (productToRemove) => {
     setShoppingBagItems(removeFromBag(shoppingBagItems, productToRemove));
@@ -92,6 +117,10 @@ export function ShoppingBagProvider({ children }) {
         wishlistItems,
         addWishlistItem,
         removeWishlistItem,
+        isShoppingBagOpened,
+        setIsShoppingBagOpened,
+        cartId,
+        setCartId,
       }}
     >
       {children}

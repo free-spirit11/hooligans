@@ -63,3 +63,53 @@ Next todo:
 ---
 
 Next step: integrate with medusa
+for medusa:
+Add:
+brand, model, gender …
+add option for different images depending on the color (or for each variants. In case of no image – take the main thumbnail and media images by default)
+
+explore possibilities what is better to do – add as options and variants, or customize product entity to contain these additional features
+
+As Brand and Model can not have variants, it should be one of the attributes of the product schema. And it should be available in the Admin UI.
+
+2. Is it possible to change admin dashboard ui, so that it was possible to select multiple products and change some of parameters in bulk (think on it more)
+3. Price should be visible and easily accessible in the Admin UI for each variant
+
+> > > Implement Cart and Checkout functionality
+> > > started implementing cart with chatgpt, but it doesn't work. Read documentation carefully and try again
+> > > Try to understand how cart api works by logging it on all stages.
+> > > in case of order, or registration - create cart with ready info and client info on the be.
+
+As an option - can send api calls for updates after executing functions locally. and than in case of errors do some actions.
+
+Impplement variants instead of products for product page and cart and so on when everything else is ready
+Add animation for + - buttons in the shopping bag
+
+The problem with the quantity of the items for Balenciaga is because I don't have enough in the inventory. Handle this case: I should block adding items if the quantity of the remaining ones in the inventory is less than client tries to select.
+Disable button on the product page and wishlist as well when the quantity added is higher than allowed
+
+!!! Current issue: I still get the error about inventory, although I'm not choosing too many items quantity when I handle multiple items.
+GPT recommendation:
+Batch Updates: Instead of calling the API multiple times in quick succession, consider batching the updates and sending them in a single API call if your backend supports it.
+Check the gpt recommended chaining method - learn and notate
+
+!!! ISSUE: Implemented cart, but I am getting error upon calling useGetCart hook when cartId is not defined yet. Can't find the way around accept for re-writing component to call this hook from a different component which renders only when cartId is defined. Implement this next time and start working on the checkout.
+
+> Implement some indication of having products in the shopping bag (blue dot or number)
+> make + - button available only if url endpoint is not /checkout
+
++++ Payment done
+
+> Authorization - think what functionality do I need there and how it should be connected with the payments and teacking
+
+> User cabinet > history od orders and orders statuses
+
+> Notifications
+
+> Search
+
+> Filtering and sorting
+
+> SEO
+
+> Analytics dashboard on the admin page

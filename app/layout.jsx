@@ -6,6 +6,7 @@ import { ShoppingBagProvider } from '@/contexts/ShoppingBagContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MedusaReactProvider from '@/contexts/MedusaProvider';
+import ClientProviders from '@/providers/ClientProviders';
 
 export const metadata = {
   title: 'Hooligans',
@@ -18,15 +19,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ShoppingBagProvider>
-      <MedusaReactProvider>
-        <html lang='en'>
-          <body>
+      <html lang='en'>
+        <body>
+          <ClientProviders>
             <main> {children}</main>
             <Footer />
             <ToastContainer position='bottom-center' />
-          </body>
-        </html>
-      </MedusaReactProvider>
+          </ClientProviders>
+        </body>
+      </html>
     </ShoppingBagProvider>
   );
 }

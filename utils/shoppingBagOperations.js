@@ -1,11 +1,11 @@
 export const addToBag = (shoppingBagItems, productToAdd) => {
   const itemIsInBag = shoppingBagItems.find(
-    (bagItem) => bagItem._id === productToAdd._id
+    (bagItem) => bagItem.id === productToAdd.id
   );
 
   if (itemIsInBag) {
     return shoppingBagItems.map((bagItem) =>
-      bagItem._id === productToAdd._id
+      bagItem.id === productToAdd.id
         ? { ...bagItem, quantity: bagItem.quantity + 1 }
         : bagItem
     );
@@ -16,7 +16,7 @@ export const addToBag = (shoppingBagItems, productToAdd) => {
 
 export const removeFromBag = (shoppingBagItems, productToRemove) => {
   const itemIsInBag = shoppingBagItems.find(
-    (bagItem) => bagItem._id === productToRemove._id
+    (bagItem) => bagItem.id === productToRemove.id
   );
 
   if (!itemIsInBag) {
@@ -24,7 +24,7 @@ export const removeFromBag = (shoppingBagItems, productToRemove) => {
   }
 
   const updatedBagItems = shoppingBagItems.map((bagItem) =>
-    bagItem._id === productToRemove._id
+    bagItem.id === productToRemove.id
       ? { ...bagItem, quantity: bagItem.quantity - 1 }
       : bagItem
   );
@@ -34,12 +34,12 @@ export const removeFromBag = (shoppingBagItems, productToRemove) => {
 
 export const deleteFromBag = (shoppingBagItems, productToDelete) => {
   const itemIsInBag = shoppingBagItems.find(
-    (bagItem) => bagItem._id === productToDelete._id
+    (bagItem) => bagItem.id === productToDelete.id
   );
   if (!itemIsInBag) {
     throw new Error('Item is not in bag');
   }
   return shoppingBagItems.filter(
-    (bagItem) => bagItem._id !== productToDelete._id
+    (bagItem) => bagItem.id !== productToDelete.id
   );
 };
