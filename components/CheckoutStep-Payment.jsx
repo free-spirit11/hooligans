@@ -1,8 +1,9 @@
 import { useCreatePaymentSession, useSetPaymentSession } from 'medusa-react';
 import { useEffect, useState } from 'react';
 import StripeContainer from './StripeContainer';
+import Link from 'next/link';
 
-export default function Payment({ onBack, cartId }) {
+export default function Payment({ cartId }) {
   const [paymentSessions, setPaymentSessions] = useState();
   const createPaymentSession = useCreatePaymentSession(cartId);
   const setPaymentSession = useSetPaymentSession(cartId);
@@ -10,6 +11,7 @@ export default function Payment({ onBack, cartId }) {
   const [selectedPaymentProvider, setSelectedPaymentProvider] = useState({
     provider_id: 'manual',
   });
+
   const [clientSecret, setClientSecret] = useState();
 
   useEffect(() => {
@@ -90,9 +92,13 @@ export default function Payment({ onBack, cartId }) {
         </label>
       </div> */}
       <div className='flex justify-between mt-4'>
-        <button className='mt-4 text-blue-700' onClick={onBack}>
+        <Link href='/store/checkout?step=2' className='mt-4 text-blue-700'>
+          {' '}
           Return to Shipping
-        </button>
+        </Link>
+        {/* <button className='mt-4 text-blue-700'>
+          Return to Shipping
+        </button> */}
         {/* <button className='px-6 py-3 mt-4 text-xs text-gray-300 bg-black'>
           Pay Now
         </button> */}

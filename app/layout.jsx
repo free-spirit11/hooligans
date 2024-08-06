@@ -23,7 +23,6 @@ export default function RootLayout({ children }) {
         <body>
           <ClientProviders>
             <main> {children}</main>
-            <Footer />
             <ToastContainer position='bottom-center' />
           </ClientProviders>
         </body>

@@ -120,7 +120,11 @@ const CartDBUpdater = ({
       }
 
       if (shippingMethod) {
-        addShippingMethod.mutate(shippingMethod);
+        addShippingMethod.mutate(shippingMethod, {
+          onSuccess: ({ cart }) => {
+            console.log('Shipping method selected', cart.shipping_methods);
+          },
+        });
       }
     } catch (error) {
       console.log('Error', error);

@@ -2,6 +2,7 @@ import InstaPics from '@/components/InstaPics';
 import Hero from '@/components/Hero';
 import Exhibition from '@/components/Exhibition';
 import Advertisement from '@/components/Advertisement';
+import Footer from '@/components/Footer';
 
 const HomePage = () => {
   return (
@@ -11,6 +12,7 @@ const HomePage = () => {
       <Advertisement />
       <InstaPics />
       <div className='w-full h-20'></div>
+      <Footer />
     </>
   );
 };

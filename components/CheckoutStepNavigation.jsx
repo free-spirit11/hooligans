@@ -1,8 +1,11 @@
+import React from 'react';
+import Link from 'next/link';
+
 export default function StepNavigation({ currentStep }) {
   const steps = [
-    { name: 'Information', currentOrCompleted: currentStep >= 1 },
-    { name: 'Shipping', currentOrCompleted: currentStep >= 2 },
-    { name: 'Payment', currentOrCompleted: currentStep === 3 },
+    { name: 'Information', stepNumber: 1 },
+    { name: 'Shipping', stepNumber: 2 },
+    { name: 'Payment', stepNumber: 3 },
   ];
 
   return (
@@ -23,17 +26,19 @@ export default function StepNavigation({ currentStep }) {
                     <path d='M5.293 7.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L8.586 11 5.293 7.707a1 1 0 010-1.414z' />
                   </svg>
                 )}
-                <a
-                  href='#'
+                <Link
+                  href={`/store/checkout?step=${step.stepNumber}`}
                   className={`text-sm font-medium ${
-                    step.currentOrCompleted
+                    currentStep >= step.stepNumber
                       ? 'text-blue-600 hover:text-blue-900'
                       : 'text-gray-500'
                   }`}
-                  aria-current={currentStep === index + 1 ? 'page' : undefined}
+                  aria-current={
+                    currentStep === step.stepNumber ? 'page' : undefined
+                  }
                 >
                   {step.name}
-                </a>
+                </Link>
               </div>
             </li>
           ))}

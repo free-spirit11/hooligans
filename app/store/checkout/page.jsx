@@ -5,10 +5,13 @@ import Shipping from '@/components/CheckoutStep-Shipping.jsx';
 import Payment from '@/components/CheckoutStep-Payment';
 import ShoppingBagItem from '@/components/ShoppingBagItem';
 import { useShoppingBagContext } from '@/contexts/ShoppingBagContext';
-import StepNavigation from '@/components/SheckoutStepNavigarion';
+import StepNavigation from '@/components/CheckoutStepNavigation';
+import { useSearchParams } from 'next/navigation';
 
 const CheckoutPage = () => {
-  const [step, setStep] = useState(1);
+  const searchParams = useSearchParams();
+  const step = searchParams.get('step') || '1';
+
   const { shoppingBagItems, subtotal, totalQuantity, cartId } =
     useShoppingBagContext();
 
@@ -21,6 +24,19 @@ const CheckoutPage = () => {
   if (!isClient) {
     return null; // or a loading spinner
   }
+
+  const renderStep = () => {
+    switch (step) {
+      case '1':
+        return <Information cartId={cartId} />;
+      case '2':
+        return <Shipping cartId={cartId} />;
+      case '3':
+        return <Payment cartId={cartId} />;
+      default:
+        return <Information cartId={cartId} />;
+    }
+  };
 
   return (
     <section className='grid grid-cols-2'>
@@ -91,19 +107,7 @@ const CheckoutPage = () => {
           <div className='container mx-auto'>
             <StepNavigation currentStep={step} />
             <div className='py-5'>Contact information</div>
-            {step === 1 && (
-              <Information onNext={() => setStep(2)} cartId={cartId} />
-            )}
-            {step === 2 && (
-              <Shipping
-                onNext={() => setStep(3)}
-                onBack={() => setStep(1)}
-                cartId={cartId}
-              />
-            )}
-            {step === 3 && (
-              <Payment onBack={() => setStep(2)} cartId={cartId} />
-            )}
+            {renderStep()}
           </div>
         </div>
       </div>

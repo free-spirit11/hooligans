@@ -1,8 +1,9 @@
 import { useCartShippingOptions } from 'medusa-react';
 import { useState } from 'react';
 import CartDBUpdater from './CartDBUpdater';
+import Link from 'next/link';
 
-export default function Shipping({ onNext, onBack, cartId }) {
+export default function Shipping({ cartId }) {
   const { shipping_options, isLoading } = useCartShippingOptions(cartId);
   const [shippingMethod, setShippingMethod] = useState({
     option_id: '',
@@ -35,14 +36,15 @@ export default function Shipping({ onNext, onBack, cartId }) {
           ))}
       </div>
       <div className='flex justify-between mt-4'>
-        <button className='mt-4 text-blue-700' onClick={onBack}>
+        <Link className='mt-4 text-blue-700' href='/store/checkout?step=1'>
           Return to Information
-        </button>
-        <div onClick={onNext}>
+        </Link>
+        <div>
           <CartDBUpdater
             cartId={cartId}
             tailwindCl='px-6 py-3 mt-4 text-xs text-gray-300 bg-black'
             buttonName='Continue to Payment'
+            routeToGo='/store/checkout?step=3'
             shippingMethod={shippingMethod}
           />
         </div>

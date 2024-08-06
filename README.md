@@ -113,3 +113,5 @@ Check the gpt recommended chaining method - learn and notate
 > SEO
 
 > Analytics dashboard on the admin page
+
+CURRENT PROBLEM: now when I first time choose shipping and go to payment - there is an issue happening seemingly due to multiple tries to create payment session (that is done by useEffect). My idea to fix it - try creating the payment session right away in the CartDBUpdater component onSuccess of selecting shipping method. otherwise try to implement some check in useEffect to create it only if it doesn't exist

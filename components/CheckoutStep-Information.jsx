@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import CartDBUpdater from './CartDBUpdater';
-import { useCartShippingOptions } from 'medusa-react';
 
-export default function Information({ onNext, cartId }) {
+export default function Information({ cartId }) {
   const [formData, setFormData] = useState({
     email: '',
     shipping_address: {
@@ -11,7 +10,7 @@ export default function Information({ onNext, cartId }) {
       last_name: '',
       phone: '',
       address_1: '',
-      address_2: '',
+      // address_2: '',
       city: '',
       country_code: 'us', // 2 character iso code in lower case
       province: '',
@@ -36,12 +35,6 @@ export default function Information({ onNext, cartId }) {
       }));
     }
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // Do any additional logic if needed
-  //   onNext();
-  // };
 
   return (
     <div className='pb-5'>
@@ -109,20 +102,6 @@ export default function Information({ onNext, cartId }) {
           onChange={handleChange}
         />
       </div>
-
-      <div className='my-3'>
-        <label>
-          <span className='text-gray-500'>Address 2</span>
-        </label>
-        <input
-          type='text'
-          name='address_2'
-          className='w-full py-2 border-b border-black focus:outline-none'
-          value={formData.shipping_address.address_2}
-          onChange={handleChange}
-        />
-      </div>
-
       <div className='my-3'>
         <label>
           <span className='text-gray-500'>City</span>
@@ -196,12 +175,12 @@ export default function Information({ onNext, cartId }) {
         <Link href='/'>
           <button className='mt-4 text-blue-700'>Return to the Homepage</button>
         </Link>
-        <div onClick={onNext}>
+        <div>
           <CartDBUpdater
             cartId={cartId}
             tailwindCl='px-6 py-3 mt-4 text-xs text-gray-300 bg-black'
             buttonName='Continue to Shipping'
-            // routeToGo='/store/checkout'
+            routeToGo='/store/checkout?step=2'
             additionalCartInfo={formData}
           />
         </div>
