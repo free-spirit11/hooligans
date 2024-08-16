@@ -115,3 +115,5 @@ Check the gpt recommended chaining method - learn and notate
 > Analytics dashboard on the admin page
 
 IMPLEMENTING NOW: filtering> decide what attributes goes into what places. e.g. color will be in options, as well as size attribute. All the rest should probably be added to the general schema
+
+FINISHED AT: added meilisearch packs and configs on back and front end. Created the search function in lib. Now need to use that function from the filters (try only price for now and later modify the function to implement other filters)

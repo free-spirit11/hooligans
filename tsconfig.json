@@ -111,11 +111,12 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx",
+    // "**/*.js",
+    // "**/*.jsx",
     ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "**/*.js", "**/*.jsx"
   ]
 }
