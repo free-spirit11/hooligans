@@ -7,6 +7,8 @@ import ShoppingBagItem from '@/components/ShoppingBagItem';
 import { useShoppingBagContext } from '@/contexts/ShoppingBagContext';
 import StepNavigation from '@/components/CheckoutStepNavigation';
 import { useSearchParams } from 'next/navigation';
+import SuccessPayment from '@/components/SuccessPayment';
+import Link from 'next/link';
 
 const CheckoutPage = () => {
   const searchParams = useSearchParams();
@@ -33,10 +35,16 @@ const CheckoutPage = () => {
         return <Shipping cartId={cartId} />;
       case '3':
         return <Payment cartId={cartId} />;
+      case 'success':
+        return <SuccessPayment />;
       default:
         return <Information cartId={cartId} />;
     }
   };
+
+  if (step === 'success') {
+    return renderStep();
+  }
 
   return (
     <section className='grid grid-cols-2'>
@@ -45,7 +53,7 @@ const CheckoutPage = () => {
         className='absolute inset-y-0 left-0 px-5 pt-10 w-[50%] bg-white'
       >
         <div className='flex flex-col'>
-          <div className='flex self-center w-40'>
+          <Link href='/' name='logo' className='flex self-center w-40'>
             <svg
               width='100%'
               height='100%'
@@ -103,11 +111,11 @@ const CheckoutPage = () => {
                 </clipPath>
               </defs>
             </svg>
-          </div>
+          </Link>
           <div className='container mx-auto'>
-            <StepNavigation currentStep={step} />
-            <div className='py-5'>Contact information</div>
-            {renderStep()}
+            {step !== 'success' && <StepNavigation currentStep={step} />}
+            {/* <div className='py-5'>Contact information</div> */}
+            {step !== 'success' && renderStep()}
           </div>
         </div>
       </div>

@@ -4,11 +4,13 @@ import {
   PaymentElement,
 } from '@stripe/react-stripe-js';
 import { useCompleteCart } from 'medusa-react';
+import { useRouter } from 'next/navigation';
 
 const StripePaymentForm = ({ cartId }) => {
   const stripe = useStripe();
   const elements = useElements();
   const completeCart = useCompleteCart(cartId);
+  const router = useRouter();
 
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
@@ -25,7 +27,7 @@ const StripePaymentForm = ({ cartId }) => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        // return_url: 'https://example.com/order/123/complete',
+        return_url: `${process.env.NEXT_PUBLIC_DOMAIN}/store/checkout?step=success`,
       },
       redirect: 'if_required',
     });
@@ -42,6 +44,7 @@ const StripePaymentForm = ({ cartId }) => {
         completeCart.mutate(void 0, {
           onSuccess: ({ data, type }) => {
             console.log(data.id, type);
+            router.push('/store/checkout?step=success');
           },
         });
       }
