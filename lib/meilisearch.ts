@@ -2,9 +2,14 @@
 import { MeiliSearch } from 'meilisearch';
 
 export const meilisearchClient = new MeiliSearch({
-  host: process.env.MEILISEARCH_HOST!,
-  apiKey: process.env.MEILISEARCH_API_KEY!,
+  host: 'http://localhost:7700',
+  apiKey: 'aSampleMasterKey',
 });
+
+// export const meilisearchClient = new MeiliSearch({
+//   host: process.env.MEILISEARCH_HOST!,
+//   apiKey: process.env.MEILISEARCH_API_KEY,
+// });
 
 // lib/meilisearch
 type FiltersQuery = {
@@ -16,6 +21,8 @@ type FiltersQuery = {
   maxPrice?: number;
   query?: string;
   currencyCode?: string;
+  color?: string;
+  brand?: string;
 };
 
 const PAGE_SIZE = 15;

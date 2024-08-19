@@ -45,29 +45,31 @@ const BRAND_FILTERS = {
   ],
 };
 
-const PRICE_FILTERS = {
-  id: 'price',
-  name: 'Price',
-  options: [
-    { value: [0, 1000], label: 'Any price' },
-    { value: [0, 200], label: 'Under 200$' },
-    { value: [0, 400], label: 'Under 400$' },
-    // custom option in JSX
-  ],
-};
+// const PRICE_FILTERS = {
+//   id: 'price',
+//   name: 'Price',
+//   options: [
+//     { value: [0, 1000], label: 'Any price' },
+//     { value: [0, 200], label: 'Under 200$' },
+//     { value: [0, 400], label: 'Under 400$' },
+//     // custom option in JSX
+//   ],
+// };
 
 const SUBCATEGORIES = [
   { name: 'Sunglasses', selected: true, href: '#' },
   { name: 'Eyeglasses', selected: false, href: '#' },
 ];
 
-const DEFAULT_CUSTOM_PRICE = [0, 1000];
+const DEFAULT_CUSTOM_PRICE = [0, 100000];
 
 const Filters = () => {
   const [filter, setFilter] = useState({
     color: ['all'],
     brand: ['all'],
-    price: { range: DEFAULT_CUSTOM_PRICE },
+    minPrice: DEFAULT_CUSTOM_PRICE[0],
+    maxPrice: DEFAULT_CUSTOM_PRICE[1],
+    // price: { range: DEFAULT_CUSTOM_PRICE },
     // sort: 'none',
   });
 
@@ -97,8 +99,8 @@ const Filters = () => {
     }
   };
 
-  const minPrice = Math.min(filter.price.range[0], filter.price.range[1]);
-  const maxPrice = Math.max(filter.price.range[0], filter.price.range[1]);
+  // const minPrice = Math.min(filter.price.range[0], filter.price.range[1]);
+  // const maxPrice = Math.max(filter.price.range[0], filter.price.range[1]);
 
   return (
     <main className='max-w-[90%] px-4 mx-auto sm:px-6 lg:px-8'>
@@ -290,8 +292,8 @@ const Filters = () => {
                       <div className='flex justify-between my-3'>
                         <p className='font-medium'>Price</p>
                         <div>
-                          {filter.price.range[0].toFixed(0)} $ -{' '}
-                          {filter.price.range[1].toFixed(0)} $
+                          {(filter.minPrice / 100).toFixed(0)} $ -{' '}
+                          {(filter.maxPrice / 100).toFixed(0)} $
                         </div>
                       </div>
 
@@ -300,16 +302,18 @@ const Filters = () => {
                           const [newMin, newMax] = range;
                           setFilter((prev) => ({
                             ...prev,
-                            price: {
-                              range: [newMin, newMax],
-                            },
+                            minPrice: newMin,
+                            maxPrice: newMax,
+                            // price: {
+                            //   range: [newMin, newMax],
+                            // },
                           }));
                         }}
-                        value={filter.price.range}
+                        value={[filter.minPrice, filter.maxPrice]}
                         min={DEFAULT_CUSTOM_PRICE[0]}
                         defaultValue={DEFAULT_CUSTOM_PRICE}
                         max={DEFAULT_CUSTOM_PRICE[1]}
-                        step={5}
+                        step={10000}
                       />
                     </li>
                   </ul>

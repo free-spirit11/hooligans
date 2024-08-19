@@ -1,15 +1,31 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { fetchProducts } from '@/utils/requests';
+// import { fetchProducts } from '@/utils/requests';
 import ProductCard from './ProductCard';
 import Pagination from './Pagination';
 import { useProducts } from 'medusa-react';
+import { getProductsFromMeilisearch } from '@/lib/meilisearch';
 
 const ProductsGrid = ({ filter }) => {
-  const { products, isLoading, error } = useProducts({
-    // q: 'black',
-  });
-  console.log(products);
+  // const { products, isLoading, error } = useProducts({
+  //   // q: 'black',
+  // });
+  const [products, setProducts] = useState(null);
+
+  // const producten = getProductsFromMeilisearch({
+  //   minPrice: filter.price.range[0],
+  //   maxPrice: filter.price.range[1],
+  // });
+  // console.log(products);
+
+  useEffect(() => {
+    async function fetchProducts(filter) {
+      const result = await getProductsFromMeilisearch(filter);
+      console.log(result);
+      setProducts(result.hits);
+    }
+    fetchProducts(filter);
+  }, [filter]);
 
   // const [products, setProducts] = useState(null);
   const [page, setPage] = useState(1);
