@@ -116,4 +116,9 @@ Check the gpt recommended chaining method - learn and notate
 
 IMPLEMENTING NOW: filtering> decide what attributes goes into what places. e.g. color will be in options, as well as size attribute. All the rest should probably be added to the general schema
 
-FINISHED AT: added meilisearch packs and configs on back and front end. Created the search function in lib. Now need to use that function from the filters (try only price for now and later modify the function to implement other filters)
+FINISHED AT: Working on Search functionality:
+
+1. State with the search input +
+2. onChange sets the state +
+3. find the function for clicking enter, which should send the state as the query parameter, and router.push to the corresponding one. +
+4. Create search results page which will use meilisearch and show the search results page (start with the products page and than improve gradually) NEXT > need to implement the meilisearch functionality for search

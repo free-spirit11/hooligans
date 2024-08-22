@@ -1,7 +1,18 @@
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const SearchBar = ({ color }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
+  const router = useRouter();
+
+  const handleSearchClick = () => {
+    if (searchInput === '') {
+      router.push('/store');
+    } else {
+      router.push(`/search?search=${searchInput}`);
+    }
+  };
 
   return (
     <div className='relative flex items-center'>
@@ -14,6 +25,14 @@ const SearchBar = ({ color }) => {
         } h-10`}
         onFocus={() => setIsExpanded(true)}
         onBlur={() => setIsExpanded(false)}
+        onChange={(e) => {
+          setSearchInput(e.target.value);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.keyCode === 13) {
+            handleSearchClick();
+          }
+        }}
       />
       <svg
         onClick={() => document.getElementById('search-input').focus()} // Focus the input when SVG is clicked
