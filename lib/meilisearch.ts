@@ -1,4 +1,3 @@
-// lib/meilisearch
 import { MeiliSearch } from 'meilisearch';
 
 export const meilisearchClient = new MeiliSearch({
@@ -6,38 +5,35 @@ export const meilisearchClient = new MeiliSearch({
   apiKey: 'aSampleMasterKey',
 });
 
-// export const meilisearchClient = new MeiliSearch({
-//   host: process.env.MEILISEARCH_HOST!,
-//   apiKey: process.env.MEILISEARCH_API_KEY,
-// });
-
-// lib/meilisearch
 type FiltersQuery = {
   categories?: string[];
   orderBy?: string;
   order?: 'asc' | 'desc';
-  page?: number;
+  // page?: number;
   minPrice?: number;
   maxPrice?: number;
   query?: string;
   currencyCode?: string;
-  color?: string;
-  brand?: string;
+  color?: string[];
+  brand?: string[];
 };
 
-const PAGE_SIZE = 15;
-
-export async function getProductsFromMeilisearch({
-  categories,
-  maxPrice,
-  minPrice,
-  orderBy,
-  order = 'asc',
+export async function getProductsFromMeilisearch(
+  {
+    categories,
+    maxPrice,
+    minPrice,
+    orderBy,
+    order = 'asc',
+    query,
+    currencyCode = 'usd',
+    brand,
+    color,
+  }: FiltersQuery,
   page = 1,
-  query,
-  currencyCode = 'usd',
-}: FiltersQuery) {
-  const offset = (page - 1) * PAGE_SIZE;
+  pageSize = 9
+) {
+  const offset = (page - 1) * pageSize;
 
   const queries: string[] = [];
 
@@ -57,8 +53,20 @@ export async function getProductsFromMeilisearch({
     );
   }
 
+  if (brand && !brand.includes('all')) {
+    queries.push(`brand IN [${brand.map((b) => `"${b}"`).join(', ')}]`);
+  }
+
+  if (color && !color.includes('all')) {
+    queries.push(
+      `variant_options_value IN [${color.map((c) => `"${c}"`).join(', ')}]`
+    );
+  }
+
+  console.log(queries);
+
   const result = await meilisearchClient.index('products').search(query, {
-    limit: PAGE_SIZE,
+    limit: pageSize,
     offset: offset,
     sort: orderBy ? [`${orderBy}:${order}`] : undefined,
     filter: queries.join(' AND '),

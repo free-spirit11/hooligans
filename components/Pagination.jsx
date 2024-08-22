@@ -16,7 +16,7 @@ const Pagination = ({
   };
 
   const handlePageSizeChange = (event) => {
-    const newPageSize = event.target.value;
+    const newPageSize = Number(event.target.value);
     onPageSizeChange(newPageSize);
   };
 
