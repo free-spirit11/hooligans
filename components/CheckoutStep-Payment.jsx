@@ -14,16 +14,12 @@ export default function Payment({ cartId }) {
   const [clientSecret, setClientSecret] = useState();
 
   useEffect(() => {
-    setPaymentSession.mutate(
-      selectedPaymentProvider,
-
-      {
-        onSuccess: ({ cart }) => {
-          setClientSecret(cart.payment_session.data.client_secret);
-          console.log(cart);
-        },
-      }
-    );
+    setPaymentSession.mutate(selectedPaymentProvider, {
+      onSuccess: ({ cart }) => {
+        setClientSecret(cart.payment_session.data.client_secret);
+        console.log(cart);
+      },
+    });
   }, [selectedPaymentProvider]);
 
   const handleProviderSelect = (provider_id) => {

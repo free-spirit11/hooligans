@@ -1,7 +1,14 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useShoppingBagContext } from '@/contexts/ShoppingBagContext';
 
 const SuccessPayment = () => {
+  const { resetShoppingBagContext } = useShoppingBagContext();
+
+  useEffect(() => {
+    resetShoppingBagContext();
+  }, []);
+
   return (
     <div className='flex items-center justify-center min-h-screen bg-gray-100'>
       <div className='p-6 text-center bg-white rounded-lg shadow-lg'>

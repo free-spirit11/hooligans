@@ -34,14 +34,16 @@ const removeFromWishlist = (wishlistItems, productToRemove) => {
   );
 };
 
-const ShoppingBagContext = createContext({
+export const DEFAULT_CONTEXT = {
   shoppingBagOpened: false,
   shoppingBagItems: [],
   subtotal: 0,
   totalQuantity: 0,
   wishlistItems: [],
   cartId: null,
-});
+};
+
+const ShoppingBagContext = createContext(DEFAULT_CONTEXT);
 
 export function ShoppingBagProvider({ children }) {
   const [shoppingBagItems, setShoppingBagItems] = useState(() => {
@@ -104,6 +106,16 @@ export function ShoppingBagProvider({ children }) {
     toast.success('Item removed from the Wishlist successfully');
   };
 
+  const resetShoppingBagContext = () => {
+    setShoppingBagItems(DEFAULT_CONTEXT.shoppingBagItems);
+    setSubtotal(DEFAULT_CONTEXT.subtotal);
+    setTotalQuantity(DEFAULT_CONTEXT.totalQuantity);
+    setWishlistItems(DEFAULT_CONTEXT.wishlistItems);
+    setIsShoppingBagOpened(DEFAULT_CONTEXT.shoppingBagOpened);
+    setCartId(DEFAULT_CONTEXT.cartId);
+    localStorage.removeItem('cart_id');
+  };
+
   return (
     <ShoppingBagContext.Provider
       value={{
@@ -121,6 +133,7 @@ export function ShoppingBagProvider({ children }) {
         setIsShoppingBagOpened,
         cartId,
         setCartId,
+        resetShoppingBagContext,
       }}
     >
       {children}
