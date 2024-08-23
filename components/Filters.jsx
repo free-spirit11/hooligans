@@ -15,6 +15,8 @@ import {
 } from '@/components/ui/accordion';
 import { Slider } from '@/components/ui/slider';
 import ProductsGrid from './ProductsGrid';
+import { useSearchParams } from 'next/navigation';
+
 const SORT_OPTIONS = [
   { name: 'None', value: 'none' },
   { name: 'Price: Low to High', value: 'price-asc' },
@@ -64,6 +66,9 @@ const SUBCATEGORIES = [
 const DEFAULT_CUSTOM_PRICE = [0, 100000];
 
 const Filters = () => {
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get('search');
+
   const [filter, setFilter] = useState({
     color: ['all'],
     brand: ['all'],
@@ -325,7 +330,7 @@ const Filters = () => {
           {/* Product grid */}
 
           <div className='lg:col-span-3'>
-            <ProductsGrid filter={filter} />
+            <ProductsGrid filter={filter} searchQuery={searchQuery} />
           </div>
         </div>
       </section>

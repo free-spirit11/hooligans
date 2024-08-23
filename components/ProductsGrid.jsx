@@ -5,7 +5,7 @@ import Pagination from './Pagination';
 import { useProducts } from 'medusa-react';
 import { getProductsFromMeilisearch } from '@/lib/meilisearch';
 
-const ProductsGrid = ({ filter }) => {
+const ProductsGrid = ({ filter, searchQuery }) => {
   const [products, setProducts] = useState(null);
 
   const [page, setPage] = useState(1);
@@ -14,13 +14,17 @@ const ProductsGrid = ({ filter }) => {
 
   useEffect(() => {
     async function fetchProducts(filter, page, pageSize) {
-      const result = await getProductsFromMeilisearch(filter, page, pageSize);
+      const result = await getProductsFromMeilisearch(
+        { ...filter, query: searchQuery },
+        page,
+        pageSize
+      );
       console.log(result);
       setProducts(result.hits);
       setTotalItems(result.estimatedTotalHits);
     }
     fetchProducts(filter, page, pageSize);
-  }, [filter, page, pageSize]);
+  }, [filter, searchQuery, page, pageSize]);
 
   const handlePageChange = (newPage) => {
     setPage(newPage);
